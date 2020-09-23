@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -r esm .",
+    "server": "nodemon -r esm",
+    "react-start": "cd client && yarn run start",
+    "dev": "concurrently \"yarn run server\" \" yarn run react-start\""
   },
   "dependencies": {
     "apollo-server-express": "^2.17.0",
     "bcryptjs": "^2.4.3",
+    "concurrently": "^5.3.0",
     "consola": "^2.15.0",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
