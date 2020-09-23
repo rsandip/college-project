@@ -1,0 +1,91 @@
+query GET_ALL_POSTS {
+  getAllPosts {
+    id
+    title
+    content
+    featuredImage
+    createdAt
+    updatedAt
+  }
+}
+
+query GET_SINGLE_POST($id: ID!) {
+  getSinglePost(id: $id) {
+    id
+    title
+    content
+    featuredImage
+    createdAt
+    updatedAt
+  }
+}
+
+query GET_POST_BY_LIMIT_AND_PAGE($page: Int, $limit: Int) {
+  getPostByLimitAndPage(page: $page, limit: $limit) {
+    paginator {
+      postCount
+      pageCount
+      currentPage
+      hasPrevPage
+      hasNextPage
+      prev
+      next
+    }
+    posts {
+      title
+      content
+    }
+  }
+}
+
+query GET_AUTHENTICATED_USER_POST($page: Int, $limit: Int) {
+  getAuthenticatedUserPosts(page: $page, limit: $limit) {
+    posts {
+      title
+      content
+      author {
+        email
+        username
+      }
+    }
+  }
+}
+
+mutation CREATE_NEW_POST(
+  $title: String!
+  $content: String!
+  $featuredImage: String
+) {
+  createNewPost(
+    postInput: {
+      title: $title
+      content: $content
+      featuredImage: $featuredImage
+    }
+  ) {
+    title
+    content
+    featuredImage
+    createdAt
+    updatedAt
+  }
+}
+
+mutation EDIT_POST_BY_ID($id: ID!, $updatedPost: PostInput) {
+  editPostById(id: $id, postInput: $updatedPost) {
+    id
+    title
+    content
+    featuredImage
+    createdAt
+    updatedAt
+  }
+}
+
+mutation DELETE_POST_BY_ID($id: ID!) {
+  deletePostById(id: $id) {
+    id
+    message
+    success
+  }
+}
